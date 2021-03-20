@@ -13,10 +13,6 @@ export class AppPage {
     return element(by.css('app-root h1')).getText() as Promise<string>;
   }
 
-  getCountriesContainer() {
-    return element(by.className('countries-container'));
-  }
-
   getCountriesLoaderButton() {
     return element(by.className('countries-loader-button'));
   }
@@ -25,7 +21,7 @@ export class AppPage {
     return element(by.className('country-list'));
   }
 
-  getCountryElement() {
-    return element(by.className('country'));
+  getCountryRow() {
+    return element(by.className('country-row'));
   }
 }

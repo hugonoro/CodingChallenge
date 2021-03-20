@@ -21,8 +21,8 @@ describe('workspace-project App', () => {
   it('should display a list of countries upon clicking the load button', () => {
     browser.wait(EC.elementToBeClickable(page.getCountriesLoaderButton()));
     page.getCountriesLoaderButton().click();
-    browser.wait(EC.presenceOf(page.getCountryElement()));
-    expect(page.getCountryElement().isPresent).toBeTruthy();
+    browser.wait(EC.presenceOf(page.getCountryRow()));
+    expect(page.getCountryRow().isPresent).toBeTruthy();
   });
 
   afterEach(async () => {

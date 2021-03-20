@@ -1,6 +1,7 @@
 <div class="country-list p-grid p-jc-center">
   <p-table
     [value]="countryList"
+    [loading]="loading"
     [paginator]="true"
     [rows]="10"
     [rowsPerPageOptions]="[10,25,50]"
@@ -22,7 +23,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-country>
-      <tr>
+      <tr class="country-row">
         <td>{{country.name}}</td>
         <td><img style="width: 25px" src="{{country.flag}}"></td>
       </tr>
