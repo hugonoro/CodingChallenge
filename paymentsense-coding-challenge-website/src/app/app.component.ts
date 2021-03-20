@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PaymentsenseCodingChallengeApiService } from './services';
 import { take } from 'rxjs/operators';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
@@ -16,7 +17,7 @@ export class AppComponent {
   public paymentsenseCodingChallengeApiActiveIcon = this.faThumbsDown;
   public paymentsenseCodingChallengeApiActiveIconColour = 'red';
 
-  constructor(private paymentsenseCodingChallengeApiService: PaymentsenseCodingChallengeApiService) {
+  constructor(private paymentsenseCodingChallengeApiService: PaymentsenseCodingChallengeApiService, private router: Router) {
     paymentsenseCodingChallengeApiService.getHealth().pipe(take(1))
     .subscribe(
       apiHealth => {
@@ -33,5 +34,9 @@ export class AppComponent {
         this.paymentsenseCodingChallengeApiActiveIcon = this.faThumbsDown;
         this.paymentsenseCodingChallengeApiActiveIconColour = 'red';
       });
+  }
+
+  onLoadCountries(){
+    this.router.navigateByUrl('/countries', { skipLocationChange: true })
   }
 }

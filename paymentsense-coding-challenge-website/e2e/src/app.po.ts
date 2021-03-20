@@ -2,10 +2,30 @@ import { browser, by, element } from 'protractor';
 
 export class AppPage {
   navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+    return browser.get(browser.baseUrl);
+  }
+
+  getTitle() {
+    return element(by.css('app-root h1'));
   }
 
   getTitleText() {
     return element(by.css('app-root h1')).getText() as Promise<string>;
+  }
+
+  getCountriesContainer() {
+    return element(by.className('countries-container'));
+  }
+
+  getCountriesLoaderButton() {
+    return element(by.className('countries-loader-button'));
+  }
+
+  getCountryList() {
+    return element(by.className('country-list'));
+  }
+
+  getCountryElement() {
+    return element(by.className('country'));
   }
 }

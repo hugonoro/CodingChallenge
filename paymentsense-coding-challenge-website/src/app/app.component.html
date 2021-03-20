@@ -4,8 +4,17 @@
   <h1>
     {{ title }}
   </h1>
-  <h2>... Paymentsense Coding Challenge API is <fa-icon [icon]=paymentsenseCodingChallengeApiActiveIcon
-                                                        [styles]="{ 'stroke': paymentsenseCodingChallengeApiActiveIconColour, 'color': paymentsenseCodingChallengeApiActiveIconColour }"></fa-icon> ...</h2>
+  <h2>... Paymentsense Coding Challenge API is
+    <fa-icon [icon]=paymentsenseCodingChallengeApiActiveIcon
+             [styles]="{ 'stroke': paymentsenseCodingChallengeApiActiveIconColour, 'color': paymentsenseCodingChallengeApiActiveIconColour }"></fa-icon>
+    ...
+  </h2>
 </div>
 
-<router-outlet></router-outlet>
+
+<div class="countries-container" style="text-align: center">
+  <button class="countries-loader-button" (click)="onLoadCountries()">Load Countries</button>
+  <router-outlet></router-outlet>
+</div>
+
+
