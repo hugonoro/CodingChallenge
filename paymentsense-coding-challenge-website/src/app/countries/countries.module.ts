@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 import { CountriesRoutingModule } from './countries-routing.module';
 import { CountriesComponent } from './containers/countries.component';
@@ -9,7 +10,8 @@ import { CountriesComponent } from './containers/countries.component';
   declarations: [CountriesComponent],
   imports: [
     CommonModule,
-    CountriesRoutingModule
+    CountriesRoutingModule,
+    TableModule
   ]
 })
 export class CountriesModule { }

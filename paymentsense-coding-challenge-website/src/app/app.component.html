@@ -10,11 +10,12 @@
     ...
   </h2>
 </div>
-
-
-<div class="countries-container" style="text-align: center">
-  <button class="countries-loader-button" (click)="onLoadCountries()">Load Countries</button>
-  <router-outlet></router-outlet>
+<div class="countries-container p-grid p-jc-center">
+  <div class="p-col-8 p-text-center">
+    <button pButton type="button" icon="pi pi-flag" label="Load Countries" class="p-button-secondary countries-loader-button" (click)="onLoadCountries()"></button>
+  </div>
+  <div class="p-col-8">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-
 
