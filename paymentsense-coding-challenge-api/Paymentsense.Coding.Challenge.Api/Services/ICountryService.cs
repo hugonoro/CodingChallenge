@@ -7,5 +7,6 @@ namespace Paymentsense.Coding.Challenge.Api.Services
     public interface ICountryService
     {
         Task<Country[]> GetAll();
+        Task<Country[]> SearchByName(string name);
     }
 }

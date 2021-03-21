@@ -7,7 +7,7 @@ using Paymentsense.Coding.Challenge.Api.Models;
 
 namespace Paymentsense.Coding.Challenge.Api.Services
 {
-    public class CountryService: ICountryService
+    public class CountryService : ICountryService
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
@@ -24,6 +24,22 @@ namespace Paymentsense.Coding.Challenge.Api.Services
             var client = _clientFactory.CreateClient();
 
             var response = await client.GetAsync($"{countriesApi}/all");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var countryList = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Country[]>(countryList);
+            }
+
+            throw new Exception("An error occurred while connecting to the countries API endpoint.");
+        }
+
+        public async Task<Country[]> SearchByName(string name)
+        {
+            var countriesApi = _configuration.GetValue<string>("CountriesAPI");
+            var client = _clientFactory.CreateClient();
+
+            var response = await client.GetAsync($"{countriesApi}/name/{name}");
 
             if (response.IsSuccessStatusCode)
             {

@@ -27,5 +27,12 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
             var countryList = await _countryService.GetAll();
             return Ok(countryList);
         }
+
+        [HttpGet("search")]
+        public async Task<ActionResult> SarchCountryByName(string nameQuery)
+        {
+            var countryList = await _countryService.SearchByName(nameQuery);
+            return Ok(countryList);
+        }
     }
 }
