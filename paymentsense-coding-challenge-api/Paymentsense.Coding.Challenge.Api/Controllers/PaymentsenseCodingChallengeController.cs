@@ -29,9 +29,9 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult> SarchCountryByName(string nameQuery)
+        public async Task<ActionResult> SarchCountryByName(string name)
         {
-            var countryList = await _countryService.SearchByName(nameQuery);
+            var countryList = await _countryService.SearchByName(name);
             return Ok(countryList);
         }
     }

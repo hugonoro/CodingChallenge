@@ -1,79 +1,100 @@
 <div class="country-list p-grid p-jc-center">
-  <p-table
-    [dataKey]="'name'"
-    [value]="countryList"
-    [loading]="loading"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[10,25,50]"
-    [showCurrentPageReport]="true"
-    [scrollable]="true"
-    scrollHeight="35rem"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width: 3rem"></th>
-        <th>
-          <div class="p-d-flex p-jc-between p-ai-center">
-            Country Name
-            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
-          </div>
-        </th>
-        <th>
-          National Flag
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-country let-expanded="expanded">
-      <tr class="country-row">
-        <td style="width: 3rem">
-          <button type="button" pButton pRipple [pRowToggler]="country"
-                  class="p-button-text p-button-rounded p-button-plain p-button-icon-only row-expander"
-                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td>
-        <td>{{country.name}}</td>
-        <td><img style="width: 1.8rem" src="{{country.flag}}"></td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-country>
-      <tr style="background-color: whitesmoke">
-        <td colspan="3">
-          <div class="p-grid p-jc-around">
-            <div class="p-col-6 p-text-center capital-city">
-              <strong>CAPITAL CITY</strong>: {{country.capital}}
+  <div class="p-col-12">
+    <p-menubar [model]="menuItems">
+      <ng-template pTemplate="start">
+        <img src="assets/paymentsense-logo.svg" height="40" class="p-mr-2">
+      </ng-template>
+      <ng-template pTemplate="end">
+        <p-autoComplete placeholder="input country name" [formControl]="selectedCountry"
+                        [suggestions]="filteredCountries"
+                        (completeMethod)="searchCountry($event)" field="name" [minLength]="1">
+          <ng-template let-country pTemplate="item">
+            <div class="p-d-flex p-align-center">
+              <img src="{{country.flag}}" style="width: 1.8rem; margin-right: 0.5rem"/>
+              <div>{{country.name}}</div>
             </div>
-            <div class="p-col-6 p-text-center population">
-              <strong>POPULATION</strong>: {{country.population | number}}
+          </ng-template>
+        </p-autoComplete>
+      </ng-template>
+    </p-menubar>
+  </div>
+  <div class="p-col-12">
+    <p-table
+      [dataKey]="'name'"
+      [value]="countryList"
+      [loading]="loading"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10,25,50]"
+      [showCurrentPageReport]="true"
+      [scrollable]="true"
+      scrollHeight="30rem"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem"></th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Country Name
+              <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
             </div>
-          </div>
-          <p-divider></p-divider>
-          <div class="p-grid p-jc-around">
-            <div class="p-col-3 p-text-center">
-              <div class="timezones"><strong>TIMEZONES</strong></div>
-              <ul>
-                <li class="p-text-left" *ngFor="let countryTimezone of country.timezones">{{countryTimezone}}</li>
-              </ul>
+          </th>
+          <th>
+            National Flag
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-country let-expanded="expanded">
+        <tr class="country-row">
+          <td style="width: 3rem">
+            <button type="button" pButton pRipple [pRowToggler]="country"
+                    class="p-button-text p-button-rounded p-button-plain p-button-icon-only row-expander"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          </td>
+          <td>{{country.name}}</td>
+          <td><img style="width: 1.8rem" src="{{country.flag}}"></td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-country>
+        <tr style="background-color: whitesmoke">
+          <td colspan="3">
+            <div class="p-grid p-jc-around">
+              <div class="p-col-6 p-text-center capital-city">
+                <strong>CAPITAL CITY</strong>: {{country.capital}}
+              </div>
+              <div class="p-col-6 p-text-center population">
+                <strong>POPULATION</strong>: {{country.population | number}}
+              </div>
+            </div>
+            <p-divider></p-divider>
+            <div class="p-grid p-jc-around">
+              <div class="p-col-3 p-text-center">
+                <div class="timezones"><strong>TIMEZONES</strong></div>
+                <ul>
+                  <li class="p-text-left" *ngFor="let countryTimezone of country.timezones">{{countryTimezone}}</li>
+                </ul>
 
+              </div>
+              <div class="p-col-3 p-text-center">
+                <div class="currencies"><strong>CURRENCIES</strong></div>
+                <ul>
+                  <li class="p-text-left" *ngFor="let currency of country.currencies">
+                    {{currency.name}}: ({{currency.symbol}} - {{currency.code}})
+                  </li>
+                </ul>
+              </div>
+              <div class="p-col-3 p-text-center">
+                <div class="languages"><strong>LANGUAGES</strong></div>
+                <ul>
+                  <li class="p-text-left" *ngFor="let lang of country.languages">
+                    {{lang.name}}: ({{lang.iso639_1 | uppercase}}-{{country.altSpellings[0]}})
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="p-col-3 p-text-center">
-              <div class="currencies"><strong>CURRENCIES</strong></div>
-              <ul>
-                <li class="p-text-left" *ngFor="let currency of country.currencies">
-                  {{currency.name}}: ({{currency.symbol}} - {{currency.code}})
-                </li>
-              </ul>
-            </div>
-            <div class="p-col-3 p-text-center">
-              <div class="languages"><strong>LANGUAGES</strong></div>
-              <ul>
-                <li class="p-text-left" *ngFor="let lang of country.languages">
-                  {{lang.name}}: ({{lang.iso639_1 | uppercase}}-{{country.altSpellings[0]}})
-                </li>
-              </ul>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

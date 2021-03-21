@@ -17,4 +17,8 @@ export class PaymentsenseCodingChallengeApiService {
   public getCountries(): Observable<Country[]> {
     return this.httpClient.get<Country[]>('https://localhost:59867/countries/all');
   }
+
+  public searchByName(name: string): Observable<Country[]> {
+    return this.httpClient.get<Country[]>('https://localhost:59867/countries/search', {params: { name }})
+  }
 }
