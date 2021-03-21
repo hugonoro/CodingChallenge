@@ -28,17 +28,50 @@
       <tr class="country-row">
         <td style="width: 3rem">
           <button type="button" pButton pRipple [pRowToggler]="country"
-                  class="p-button-text p-button-rounded p-button-plain p-button-icon-only"
+                  class="p-button-text p-button-rounded p-button-plain p-button-icon-only row-expander"
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
         <td>{{country.name}}</td>
         <td><img style="width: 1.8rem" src="{{country.flag}}"></td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-product>
-      <tr>
+    <ng-template pTemplate="rowexpansion" let-country>
+      <tr style="background-color: whitesmoke">
         <td colspan="3">
-          TESTE
+          <div class="p-grid p-jc-around">
+            <div class="p-col-6 p-text-center capital-city">
+              <strong>CAPITAL CITY</strong>: {{country.capital}}
+            </div>
+            <div class="p-col-6 p-text-center population">
+              <strong>POPULATION</strong>: {{country.population | number}}
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <div class="p-grid p-jc-around">
+            <div class="p-col-3 p-text-center">
+              <div class="timezones"><strong>TIMEZONES</strong></div>
+              <ul>
+                <li class="p-text-left" *ngFor="let countryTimezone of country.timeZones">{{countryTimezone}}</li>
+              </ul>
+
+            </div>
+            <div class="p-col-3 p-text-center">
+              <div class="currencies"><strong>CURRENCIES</strong></div>
+              <ul>
+                <li class="p-text-left" *ngFor="let currency of country.currencies">
+                  {{currency.name}}: ({{currency.symbol}} - {{currency.code}})
+                </li>
+              </ul>
+            </div>
+            <div class="p-col-3 p-text-center">
+              <div class="languages"><strong>LANGUAGES</strong></div>
+              <ul>
+                <li class="p-text-left" *ngFor="let lang of country.languages">
+                  {{lang.name}}: ({{lang.iso639_1 | uppercase}}-{{country.altSpellings[0]}})
+                </li>
+              </ul>
+            </div>
+          </div>
         </td>
       </tr>
     </ng-template>

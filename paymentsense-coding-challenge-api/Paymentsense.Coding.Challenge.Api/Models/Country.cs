@@ -11,6 +11,7 @@ namespace Paymentsense.Coding.Challenge.Api.Models
         public string Capital { get; set; }
         public IEnumerable<string> TimeZones { get; set; }
         public IEnumerable<Currency> Currencies { get; set; }
+        public IEnumerable<string> AltSpellings { get; set; }
         public IEnumerable<Language> Languages { get; set; }
     }
 

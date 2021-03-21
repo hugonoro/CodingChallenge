@@ -17,8 +17,28 @@ export class AppPage {
     return element(by.className('countries-loader-button'));
   }
 
-  getCountryList() {
-    return element(by.className('country-list'));
+  getCountryRowExpandToggler() {
+    return element(by.css('button[class*="row-expander"]'));
+  }
+
+  getCapitalCity() {
+    return element(by.className('capital-city'));
+  }
+
+  getPopulation() {
+    return element(by.className('population'));
+  }
+
+  getTimezones() {
+    return element(by.className('timezones'));
+  }
+
+  getCurrencies() {
+    return element(by.className('currencies'));
+  }
+
+  getLanguages() {
+    return element(by.className('languages'));
   }
 
   getCountryRow() {

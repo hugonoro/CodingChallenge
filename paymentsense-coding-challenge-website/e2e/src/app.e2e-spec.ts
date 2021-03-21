@@ -25,6 +25,18 @@ describe('workspace-project App', () => {
     expect(page.getCountryRow().isPresent).toBeTruthy();
   });
 
+  it('should display country additional details when expanding the corresponding table row', () => {
+    browser.wait(EC.elementToBeClickable(page.getCountriesLoaderButton()));
+    page.getCountriesLoaderButton().click();
+    browser.wait(EC.elementToBeClickable(page.getCountryRowExpandToggler()));
+    page.getCountryRowExpandToggler().click();
+    expect(page.getCapitalCity().isPresent).toBeTruthy()
+    expect(page.getPopulation().isPresent).toBeTruthy()
+    expect(page.getTimezones().isPresent).toBeTruthy()
+    expect(page.getCurrencies().isPresent).toBeTruthy()
+    expect(page.getLanguages().isPresent).toBeTruthy()
+  })
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
