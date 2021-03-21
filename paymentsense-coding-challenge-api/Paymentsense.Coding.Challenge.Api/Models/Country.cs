@@ -9,7 +9,7 @@ namespace Paymentsense.Coding.Challenge.Api.Models
         public string Flag { get; set; }
         public int Population { get; set; }
         public string Capital { get; set; }
-        public IEnumerable<string> TimeZones { get; set; }
+        public IEnumerable<string> Timezones { get; set; }
         public IEnumerable<Currency> Currencies { get; set; }
         public IEnumerable<string> AltSpellings { get; set; }
         public IEnumerable<Language> Languages { get; set; }
